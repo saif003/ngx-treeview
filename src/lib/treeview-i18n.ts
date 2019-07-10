@@ -12,9 +12,12 @@ export abstract class TreeviewI18n {
 
 @Injectable()
 export class TreeviewI18nDefault extends TreeviewI18n {
-    getText(selection: TreeviewSelection): string {
+    getText(selection: TreeviewSelection,CustomText?:String): string {
         if (selection.uncheckedItems.length === 0) {
-            return this.getAllCheckboxText();
+          if(CustomText)
+            return this.getAllCheckboxText(CustomText);
+          else
+             return this.getAllCheckboxText("ALL");
         }
 
         switch (selection.checkedItems.length) {
@@ -27,8 +30,8 @@ export class TreeviewI18nDefault extends TreeviewI18n {
         }
     }
 
-    getAllCheckboxText(): string {
-        return 'All';
+    getAllCheckboxText(customText): string {
+        return customText;
     }
 
     getFilterPlaceholder(): string {
