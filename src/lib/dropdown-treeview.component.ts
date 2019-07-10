@@ -18,6 +18,7 @@ export class DropdownTreeviewComponent {
     @Input() itemTemplate: TemplateRef<TreeviewItemTemplateContext>;
     @Input() items: TreeviewItem[];
     @Input() config: TreeviewConfig;
+    @Input() customText: string;
     @Output() selectedChange = new EventEmitter<any[]>(true);
     @Output() filterChange = new EventEmitter<string>();
     @ViewChild(TreeviewComponent) treeviewComponent: TreeviewComponent;
@@ -31,6 +32,9 @@ export class DropdownTreeviewComponent {
     }
 
     getText(): string {
+      if(customText)
+        return this.i18n.getText(this.treeviewComponent.selection,customText);
+      else
         return this.i18n.getText(this.treeviewComponent.selection);
     }
 
